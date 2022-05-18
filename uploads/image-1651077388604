@@ -1,0 +1,4 @@
+ENV_MODE = development
+MONGO_URI = mongodb+srv://jacob:oppes123@main-db.qqys8.mongodb.net/main-db?retryWrites=true&w=majority
+JWT_SECRET = SECRET
+PORT = 5000
