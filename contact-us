@@ -1,0 +1,49 @@
+import React,{useState} from 'react'
+import emailjs from '@emailjs/browser';
+
+const Result = () => {
+return(
+    <p>Your message has been successfully sent. We will contact you soon</p>
+)
+}
+function Contact(props) {
+    const[result, showResult] = useState(false);
+    const sendEmail = (e) => {
+      e.preventDefault();
+      emailjs.sendForm('service_b9pvvck', 'template_ajwq7kb', e.target, 'k_1YalMKQ1UGAt-S7')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+        e.target.reset();
+        showResult(true);
+};
+setTimeout(() =>{
+    showResult(false)
+},5000);
+
+  return (
+    <form  action='' onSubmit={sendEmail}>
+
+    <div className='form-control'>
+    <label> Full name <span>*</span></label>
+    <input type="text" name='fullname' required />
+    </div>
+    <div className='form-control'>
+    <label> Email <span>*</span></label>
+    <input type="email" name='email'  required/>
+    </div>
+    <div >
+    <label> Message <span>*</span></label>
+    <textarea className='form-message' name='message' required></textarea>
+    </div>
+<button type='submit' required>Send message</button>
+<div className='row'>
+    {result ? <Result/> : null}
+</div>
+</form>
+  )
+}
+
+export default Contact
